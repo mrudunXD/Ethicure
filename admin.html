@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HealthHub · Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/admin.css" />
+  </head>
+  <body class="admin-body">
+    <!-- Left Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <div class="logo-icon">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <h2 class="logo-text">HealthHub</h2>
+        </div>
+        <button class="sidebar-collapse-btn" id="sidebarCollapse" aria-label="Collapse sidebar">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul class="nav-menu">
+          <li class="nav-item active" data-page="dashboard">
+            <a href="#dashboard" class="nav-link">
+              <i class="fas fa-tachometer-alt"></i>
+              <span class="nav-text">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="doctors">
+            <a href="#doctors" class="nav-link">
+              <i class="fas fa-user-md"></i>
+              <span class="nav-text">Manage Doctors</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="departments">
+            <a href="#departments" class="nav-link">
+              <i class="fas fa-building"></i>
+              <span class="nav-text">Departments</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="staff">
+            <a href="#staff" class="nav-link">
+              <i class="fas fa-users"></i>
+              <span class="nav-text">Staff</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="patients">
+            <a href="#patients" class="nav-link">
+              <i class="fas fa-procedures"></i>
+              <span class="nav-text">Patients</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="appointments">
+            <a href="#appointments" class="nav-link">
+              <i class="fas fa-calendar-check"></i>
+              <span class="nav-text">Appointments</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="pharmacy">
+            <a href="#pharmacy" class="nav-link">
+              <i class="fas fa-pills"></i>
+              <span class="nav-text">Pharmacy</span>
+            </a>
+          </li>
+          <li class="nav-item" data-page="settings">
+            <a href="#settings" class="nav-link">
+              <i class="fas fa-cog"></i>
+              <span class="nav-text">Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <!-- Top Navbar -->
+      <header class="admin-navbar">
+        <div class="navbar-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="welcome-text">
+            <span>Welcome, <strong id="adminName">Admin</strong></span>
+          </div>
+        </div>
+        <div class="navbar-right">
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="global-search" id="globalSearch" placeholder="Search doctors, patients, appointments...">
+            <div class="search-results" id="searchResults"></div>
+          </div>
+          <button class="nav-icon-btn" id="notificationsBtn" aria-label="Notifications">
+            <i class="far fa-bell"></i>
+            <span class="notification-badge" id="notificationBadge">3</span>
+          </button>
+          <button class="nav-icon-btn" id="messagesBtn" aria-label="Messages">
+            <i class="far fa-envelope"></i>
+            <span class="notification-badge" id="messageBadge">0</span>
+          </button>
+          <div class="profile-dropdown" id="profileDropdown">
+            <button class="profile-btn">
+              <div class="profile-avatar" id="profileAvatar">A</div>
+              <span class="profile-name" id="profileName">Admin</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+              <a href="#settings" class="dropdown-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+              </a>
+              <a href="#settings" class="dropdown-item">
+                <i class="fas fa-key"></i>
+                <span>Change Password</span>
+              </a>
+              <hr class="dropdown-divider">
+              <a href="#" class="dropdown-item" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+              </a>
+        </div>
+        </div>
+      </div>
+    </header>
+
+      <!-- Dashboard Content -->
+      <main class="admin-content">
+        <!-- Dashboard Page -->
+        <div class="page-content active" id="page-dashboard">
+          <div class="dashboard-hero">
+            <div class="hero-content">
+              <div class="hero-greeting">
+                <h1 class="hero-title">Welcome back, <span id="heroAdminName">Admin</span>!</h1>
+                <p class="hero-subtitle">Here's what's happening at your hospital today</p>
+              </div>
+              <div class="hero-date">
+                <i class="fas fa-calendar-alt"></i>
+                <span id="currentDate"></span>
+              </div>
+            </div>
+            <div class="quick-actions">
+              <button class="quick-action-btn" onclick="navigateToPage('doctors')">
+                <i class="fas fa-user-plus"></i>
+                <span>Add Doctor</span>
+              </button>
+              <button class="quick-action-btn" onclick="navigateToPage('appointments')">
+                <i class="fas fa-calendar-plus"></i>
+                <span>New Appointment</span>
+              </button>
+              <button class="quick-action-btn" onclick="navigateToPage('pharmacy')">
+                <i class="fas fa-pills"></i>
+                <span>Add Medicine</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Stats Cards -->
+          <div class="stats-grid-modern">
+            <div class="stat-card-modern stat-gradient-1">
+              <div class="stat-bg-pattern"></div>
+              <div class="stat-icon-modern">
+                <i class="fas fa-procedures"></i>
+              </div>
+              <div class="stat-content-modern">
+                <p class="stat-label-modern">Total Patients</p>
+                <h3 class="stat-value-modern" id="statPatients">0</h3>
+                <div class="stat-trend">
+                  <i class="fas fa-arrow-up"></i>
+                  <span>12% increase</span>
+                </div>
+              </div>
+              <div class="stat-sparkline"></div>
+            </div>
+
+            <div class="stat-card-modern stat-gradient-2">
+              <div class="stat-bg-pattern"></div>
+              <div class="stat-icon-modern">
+                <i class="fas fa-user-md"></i>
+              </div>
+              <div class="stat-content-modern">
+                <p class="stat-label-modern">Active Doctors</p>
+                <h3 class="stat-value-modern" id="statDoctors">0</h3>
+                <div class="stat-trend">
+                  <i class="fas fa-arrow-up"></i>
+                  <span>3 new this month</span>
+                </div>
+              </div>
+              <div class="stat-sparkline"></div>
+            </div>
+
+            <div class="stat-card-modern stat-gradient-3">
+              <div class="stat-bg-pattern"></div>
+              <div class="stat-icon-modern">
+                <i class="fas fa-calendar-check"></i>
+              </div>
+              <div class="stat-content-modern">
+                <p class="stat-label-modern">Appointments Today</p>
+                <h3 class="stat-value-modern" id="statAppointments">0</h3>
+                <div class="stat-trend">
+                  <i class="fas fa-clock"></i>
+                  <span id="pendingAppointments">0 pending</span>
+                </div>
+              </div>
+              <div class="stat-sparkline"></div>
+            </div>
+
+            <div class="stat-card-modern stat-gradient-4">
+              <div class="stat-bg-pattern"></div>
+              <div class="stat-icon-modern">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-content-modern">
+                <p class="stat-label-modern">Active Staff</p>
+                <h3 class="stat-value-modern" id="statStaff">0</h3>
+                <div class="stat-trend">
+                  <i class="fas fa-check-circle"></i>
+                  <span>All departments</span>
+                </div>
+              </div>
+              <div class="stat-sparkline"></div>
+            </div>
+
+            <div class="stat-card-modern stat-gradient-5">
+              <div class="stat-bg-pattern"></div>
+              <div class="stat-icon-modern">
+                <i class="fas fa-prescription"></i>
+              </div>
+              <div class="stat-content-modern">
+                <p class="stat-label-modern">Pending Prescriptions</p>
+                <h3 class="stat-value-modern" id="statPrescriptions">0</h3>
+                <div class="stat-trend">
+                  <i class="fas fa-hourglass-half"></i>
+                  <span>Awaiting dispense</span>
+                </div>
+              </div>
+              <div class="stat-sparkline"></div>
+            </div>
+
+            <div class="stat-card-modern stat-gradient-6">
+              <div class="stat-bg-pattern"></div>
+              <div class="stat-icon-modern">
+                <i class="fas fa-pills"></i>
+              </div>
+              <div class="stat-content-modern">
+                <p class="stat-label-modern">Available Medicines</p>
+                <h3 class="stat-value-modern" id="statMedicines">0</h3>
+                <div class="stat-trend warning" id="lowStockAlert">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  <span id="lowStockCount">0 low stock</span>
+                </div>
+              </div>
+              <div class="stat-sparkline"></div>
+            </div>
+          </div>
+
+          <!-- Main Content Grid -->
+          <div class="dashboard-grid">
+            <!-- Left Column -->
+            <div class="dashboard-left">
+              <!-- Charts Section -->
+              <div class="chart-card-modern">
+                <div class="chart-header-modern">
+                  <div>
+                    <h3 class="chart-title-modern">Appointments Overview</h3>
+                    <p class="chart-subtitle">Weekly appointment trends</p>
+                  </div>
+                  <div class="chart-controls-modern">
+                    <button class="chart-btn-modern active" data-period="week">Week</button>
+                    <button class="chart-btn-modern" data-period="month">Month</button>
+                    <button class="chart-btn-modern" data-period="year">Year</button>
+                  </div>
+                </div>
+                <div class="chart-container-modern" id="appointmentsChart">
+                  <div class="chart-placeholder">
+                    <div class="chart-bars">
+                      <div class="chart-bar" style="height: 60%"></div>
+                      <div class="chart-bar" style="height: 80%"></div>
+                      <div class="chart-bar" style="height: 45%"></div>
+                      <div class="chart-bar" style="height: 90%"></div>
+                      <div class="chart-bar" style="height: 70%"></div>
+                      <div class="chart-bar" style="height: 85%"></div>
+                      <div class="chart-bar" style="height: 55%"></div>
+                    </div>
+                    <div class="chart-labels">
+                      <span>Mon</span>
+                      <span>Tue</span>
+                      <span>Wed</span>
+                      <span>Thu</span>
+                      <span>Fri</span>
+                      <span>Sat</span>
+                      <span>Sun</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chart-card-modern">
+                <div class="chart-header-modern">
+                  <div>
+                    <h3 class="chart-title-modern">Patient Inflow</h3>
+                    <p class="chart-subtitle">Monthly patient registration</p>
+                  </div>
+                </div>
+                <div class="chart-container-modern" id="patientsChart">
+                  <div class="chart-placeholder">
+                    <div class="chart-line">
+                      <svg viewBox="0 0 400 200" class="line-chart">
+                        <polyline points="20,150 60,120 100,100 140,80 180,70 220,60 260,55 300,50 340,45 380,40" 
+                                  fill="none" stroke="#2563eb" stroke-width="2.5"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="dashboard-right">
+              <!-- Recent Activity -->
+              <div class="activity-card-modern">
+                <div class="card-header-modern">
+                  <div>
+                    <h3 class="card-title-modern">Recent Activity</h3>
+                    <p class="card-subtitle">Latest updates and events</p>
+                  </div>
+                  <a href="#appointments" class="view-all-link-modern">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="activity-list-modern" id="recentActivity"></div>
+              </div>
+
+              <!-- Department Distribution -->
+              <div class="chart-card-modern">
+                <div class="chart-header-modern">
+                  <div>
+                    <h3 class="chart-title-modern">Department Distribution</h3>
+                    <p class="chart-subtitle">Doctors by department</p>
+                  </div>
+                </div>
+                <div class="chart-container-modern" id="departmentsChart">
+                  <div class="dept-distribution" id="deptDistribution"></div>
+                </div>
+              </div>
+
+              <!-- Stock Alerts -->
+              <div class="alert-card-modern">
+                <div class="alert-header">
+                  <i class="fas fa-exclamation-circle"></i>
+                  <h3>Stock Alerts</h3>
+                </div>
+                <div class="alert-list" id="stockAlerts"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doctors Page -->
+        <div class="page-content" id="page-doctors">
+          <div class="page-header">
+              <div>
+              <h1 class="page-title">Manage Doctors</h1>
+              <p class="page-subtitle">Add, edit, and manage hospital doctors</p>
+            </div>
+            <button class="btn-primary" id="addDoctorBtn">
+              <i class="fas fa-plus"></i>
+              Add Doctor
+            </button>
+          </div>
+
+          <div class="filters-bar">
+            <select class="filter-select" id="doctorDeptFilter">
+              <option value="">All Departments</option>
+            </select>
+            <input type="text" class="filter-search" id="doctorSearch" placeholder="Search doctors...">
+          </div>
+
+          <div class="content-grid">
+            <div class="main-content">
+              <div class="data-card">
+                <div class="card-header">
+                  <h3 class="card-title">Doctors List</h3>
+                  <span class="card-count" id="doctorCount">0 doctors</span>
+                </div>
+                <div class="data-list" id="doctorsList"></div>
+              </div>
+            </div>
+            <div class="sidebar-content">
+              <div class="form-card hidden" id="doctorFormCard">
+                <div class="card-header">
+                  <h3 class="card-title">Add New Doctor</h3>
+                  <button class="close-btn" id="closeDoctorForm">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <form class="admin-form" id="doctorForm">
+                  <div class="form-group">
+                    <label class="form-label">First Name *</label>
+                    <input type="text" class="form-input" name="firstName" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Last Name *</label>
+                    <input type="text" class="form-input" name="lastName" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Specialization *</label>
+                    <input type="text" class="form-input" name="specialization" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Department *</label>
+                    <select class="form-input" name="departmentId" id="doctorDeptSelect" required></select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Experience (years)</label>
+                    <input type="number" class="form-input" name="experience" min="0">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" name="email">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-input" name="phone">
+                  </div>
+                  <input type="hidden" name="doctorId" id="doctorEditId">
+                  <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Doctor</button>
+                    <button type="button" class="btn-secondary" id="cancelDoctorForm">Cancel</button>
+                  </div>
+                  <div class="form-error" id="doctorFormError"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Departments Page -->
+        <div class="page-content" id="page-departments">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Manage Departments</h1>
+              <p class="page-subtitle">Organize hospital departments</p>
+            </div>
+            <button class="btn-primary" id="addDeptBtn">
+              <i class="fas fa-plus"></i>
+              Add Department
+            </button>
+          </div>
+
+          <div class="content-grid">
+            <div class="main-content">
+              <div class="data-card">
+                <div class="card-header">
+                  <h3 class="card-title">Departments</h3>
+                  <span class="card-count" id="deptCount">0 departments</span>
+                </div>
+                <div class="data-list" id="departmentsList"></div>
+            </div>
+          </div>
+            <div class="sidebar-content">
+              <div class="form-card hidden" id="deptFormCard">
+            <div class="card-header">
+                  <h3 class="card-title">Add Department</h3>
+                  <button class="close-btn" id="closeDeptForm">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <form class="admin-form" id="deptForm">
+                  <div class="form-group">
+                    <label class="form-label">Name *</label>
+                    <input type="text" class="form-input" name="name" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-input" name="description" rows="3"></textarea>
+                  </div>
+                  <input type="hidden" name="deptId" id="deptEditId">
+                  <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Department</button>
+                    <button type="button" class="btn-secondary" id="cancelDeptForm">Cancel</button>
+                  </div>
+                  <div class="form-error" id="deptFormError"></div>
+                </form>
+            </div>
+            </div>
+            </div>
+          </div>
+
+        <!-- Staff Page -->
+        <div class="page-content" id="page-staff">
+          <div class="page-header">
+              <div>
+              <h1 class="page-title">Manage Staff</h1>
+              <p class="page-subtitle">Hospital staff members and roles</p>
+            </div>
+            <button class="btn-primary" id="addStaffBtn">
+              <i class="fas fa-plus"></i>
+              Add Staff
+            </button>
+          </div>
+
+          <div class="filters-bar">
+            <select class="filter-select" id="staffRoleFilter">
+              <option value="">All Roles</option>
+              <option value="nurse">Nurse</option>
+              <option value="receptionist">Receptionist</option>
+              <option value="technician">Technician</option>
+              <option value="administrator">Administrator</option>
+            </select>
+            <input type="text" class="filter-search" id="staffSearch" placeholder="Search staff...">
+          </div>
+
+          <div class="content-grid">
+            <div class="main-content">
+              <div class="data-card">
+                <div class="card-header">
+                  <h3 class="card-title">Staff Members</h3>
+                  <span class="card-count" id="staffCount">0 staff</span>
+                </div>
+                <div class="data-list" id="staffList"></div>
+              </div>
+            </div>
+            <div class="sidebar-content">
+              <div class="form-card hidden" id="staffFormCard">
+            <div class="card-header">
+                  <h3 class="card-title">Add Staff Member</h3>
+                  <button class="close-btn" id="closeStaffForm">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <form class="admin-form" id="staffForm">
+                  <div class="form-group">
+                    <label class="form-label">First Name *</label>
+                    <input type="text" class="form-input" name="firstName" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Last Name *</label>
+                    <input type="text" class="form-input" name="lastName" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Role *</label>
+                    <select class="form-input" name="role" required>
+                      <option value="">Select role</option>
+                      <option value="nurse">Nurse</option>
+                      <option value="receptionist">Receptionist</option>
+                      <option value="technician">Technician</option>
+                      <option value="administrator">Administrator</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Department</label>
+                    <select class="form-input" name="departmentId" id="staffDeptSelect">
+                      <option value="">No Department</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" name="email">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-input" name="phone">
+                  </div>
+                  <input type="hidden" name="staffId" id="staffEditId">
+                  <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Staff</button>
+                    <button type="button" class="btn-secondary" id="cancelStaffForm">Cancel</button>
+                  </div>
+                  <div class="form-error" id="staffFormError"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Patients Page -->
+        <div class="page-content" id="page-patients">
+          <div class="page-header">
+              <div>
+              <h1 class="page-title">Patients List</h1>
+              <p class="page-subtitle">View and manage patient records</p>
+            </div>
+              </div>
+
+          <div class="filters-bar">
+            <input type="text" class="filter-search" id="patientSearch" placeholder="Search by Patient ID or name...">
+            <select class="filter-select" id="patientStatusFilter">
+              <option value="">All Status</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+            </div>
+
+          <div class="data-card">
+            <div class="card-header">
+              <h3 class="card-title">Patients</h3>
+              <span class="card-count" id="patientCount">0 patients</span>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-table" id="patientsTable">
+                <thead>
+                  <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Last Visit</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="patientsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Appointments Page -->
+        <div class="page-content" id="page-appointments">
+          <div class="page-header">
+              <div>
+              <h1 class="page-title">Appointments</h1>
+              <p class="page-subtitle">View and manage all appointments</p>
+            </div>
+              </div>
+
+          <div class="filters-bar">
+            <select class="filter-select" id="appointmentStatusFilter">
+              <option value="">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            <input type="date" class="filter-date" id="appointmentDateFilter">
+            <input type="text" class="filter-search" id="appointmentSearch" placeholder="Search...">
+            </div>
+
+          <div class="data-card">
+          <div class="card-header">
+              <h3 class="card-title">All Appointments</h3>
+              <span class="card-count" id="appointmentCount">0 appointments</span>
+          </div>
+            <div class="table-wrapper">
+              <table class="data-table" id="appointmentsTable">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Doctor</th>
+                  <th>Department</th>
+                    <th>Date & Time</th>
+                  <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+              </thead>
+                <tbody id="appointmentsTableBody"></tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pharmacy Page -->
+        <div class="page-content" id="page-pharmacy">
+          <div class="page-header">
+              <div>
+              <h1 class="page-title">Pharmacy Control</h1>
+              <p class="page-subtitle">Manage medicine stock and dispensing</p>
+            </div>
+            <button class="btn-primary" id="addMedicineBtn">
+              <i class="fas fa-plus"></i>
+              Add Medicine
+            </button>
+          </div>
+
+          <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 2rem;">
+            <div class="stat-card">
+              <div class="stat-icon medicines">
+                <i class="fas fa-pills"></i>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-value" id="pharmacyTotal">0</h3>
+                <p class="stat-label">Total Medicines</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon warning">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-value" id="pharmacyLow">0</h3>
+                <p class="stat-label">Low Stock</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon danger">
+                <i class="fas fa-times-circle"></i>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-value" id="pharmacyOut">0</h3>
+                <p class="stat-label">Out of Stock</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="main-content">
+              <div class="data-card">
+                <div class="card-header">
+                  <h3 class="card-title">Medicine Inventory</h3>
+                  <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="low">Low Stock</button>
+                    <button class="filter-btn" data-filter="out">Out of Stock</button>
+                  </div>
+                </div>
+                <div class="data-list" id="medicinesList"></div>
+              </div>
+            </div>
+            <div class="sidebar-content">
+              <div class="form-card hidden" id="medicineFormCard">
+                <div class="card-header">
+                  <h3 class="card-title">Add Medicine</h3>
+                  <button class="close-btn" id="closeMedicineForm">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <form class="admin-form" id="medicineForm">
+                  <div class="form-group">
+                    <label class="form-label">Medicine Name *</label>
+                    <input type="text" class="form-input" name="name" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Stock Quantity *</label>
+                    <input type="number" class="form-input" name="stock" min="0" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Unit *</label>
+                    <select class="form-input" name="unit" required>
+                      <option value="tablets">Tablets</option>
+                      <option value="bottles">Bottles</option>
+                      <option value="boxes">Boxes</option>
+                      <option value="vials">Vials</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Low Stock Threshold *</label>
+                    <input type="number" class="form-input" name="threshold" min="0" required>
+                  </div>
+              <div class="form-group">
+                    <label class="form-label">Price per Unit</label>
+                    <input type="number" class="form-input" name="price" step="0.01" min="0">
+                  </div>
+                  <input type="hidden" name="medicineId" id="medicineEditId">
+                  <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Medicine</button>
+                    <button type="button" class="btn-secondary" id="cancelMedicineForm">Cancel</button>
+                  </div>
+                  <div class="form-error" id="medicineFormError"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="data-card" style="margin-top: 2rem;">
+            <div class="card-header">
+              <h3 class="card-title">Dispense History</h3>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-table" id="dispenseTable">
+                <thead>
+                  <tr>
+                  <th>Date</th>
+                    <th>Patient</th>
+                    <th>Medicine</th>
+                    <th>Quantity</th>
+                    <th>Prescribed By</th>
+                </tr>
+              </thead>
+                <tbody id="dispenseTableBody"></tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div class="page-content" id="page-settings">
+          <div class="page-header">
+              <div>
+              <h1 class="page-title">Settings</h1>
+              <p class="page-subtitle">Manage your profile and hospital preferences</p>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="main-content">
+              <div class="data-card">
+                <div class="card-header">
+                  <h3 class="card-title">Profile Settings</h3>
+                </div>
+                <form class="admin-form" id="profileForm">
+                  <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-input" name="fullName" id="profileName" required>
+              </div>
+              <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" class="form-input" name="email" id="profileEmail" required>
+              </div>
+              <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-input" name="phone" id="profilePhone">
+              </div>
+                  <div class="form-actions">
+                    <button type="submit" class="btn-primary">Update Profile</button>
+              </div>
+                  <div class="form-error" id="profileFormError"></div>
+            </form>
+              </div>
+
+              <div class="data-card" style="margin-top: 2rem;">
+                <div class="card-header">
+                  <h3 class="card-title">Change Password</h3>
+                </div>
+                <form class="admin-form" id="passwordForm">
+                  <div class="form-group">
+                    <label class="form-label">Current Password *</label>
+                    <input type="password" class="form-input" name="currentPassword" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">New Password *</label>
+                    <input type="password" class="form-input" name="newPassword" required>
+              </div>
+              <div class="form-group">
+                    <label class="form-label">Confirm New Password *</label>
+                    <input type="password" class="form-input" name="confirmPassword" required>
+                  </div>
+                  <div class="form-actions">
+                    <button type="submit" class="btn-primary">Change Password</button>
+                  </div>
+                  <div class="form-error" id="passwordFormError"></div>
+                </form>
+              </div>
+            </div>
+            <div class="sidebar-content">
+              <div class="data-card">
+                <div class="card-header">
+                  <h3 class="card-title">Hospital Preferences</h3>
+                </div>
+                <form class="admin-form" id="preferencesForm">
+                  <div class="form-group">
+                    <label class="form-label">Hospital Name</label>
+                    <input type="text" class="form-input" name="hospitalName" id="prefHospital">
+              </div>
+              <div class="form-group">
+                    <label class="form-label">Address</label>
+                    <textarea class="form-input" name="address" id="prefAddress" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-input" name="phone" id="prefPhone">
+              </div>
+              <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" name="email" id="prefEmail">
+              </div>
+                  <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Preferences</button>
+              </div>
+                  <div class="form-error" id="preferencesFormError"></div>
+            </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Notifications Panel -->
+    <div class="notifications-panel" id="notificationsPanel">
+      <div class="panel-header">
+        <h3>Notifications</h3>
+        <button class="close-btn" id="closeNotifications">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="panel-content" id="notificationsList"></div>
+    </div>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <script type="module" src="./js/admin.js"></script>
+  </body>
+</html>
+

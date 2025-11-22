@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HealthHub · Create account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&family=Space+Grotesk:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <main class="auth-page">
+      <section class="surface auth-panel">
+        <div class="auth-panel_header">
+          <p class="pill">
+            <span aria-hidden="true">●</span>
+            Join HealthHub
+          </p>
+          <h1>Create your space</h1>
+          <p>Select a role and unlock a minimalist dashboard tailored to how you care.</p>
+        </div>
+
+        <form class="form-grid" id="signup-form" novalidate>
+          <fieldset class="form-group" style="margin: 0;">
+            <legend class="form-label">Choose a role</legend>
+            <div class="roles-grid">
+              <label>
+                <input class="role-input" type="radio" name="role" value="patient" checked />
+                <div class="role-option">
+                  <strong>Patient</strong>
+                  <span>Appointments & prescriptions</span>
+                </div>
+              </label>
+              <label>
+                <input class="role-input" type="radio" name="role" value="doctor" />
+                <div class="role-option">
+                  <strong>Doctor</strong>
+                  <span>Queue, notes, and prescribing</span>
+                </div>
+              </label>
+              <label>
+                <input class="role-input" type="radio" name="role" value="pharmacist" />
+                <div class="role-option">
+                  <strong>Pharmacist</strong>
+                  <span>Dispensing & inventory</span>
+                </div>
+              </label>
+              <label>
+                <input class="role-input" type="radio" name="role" value="staff" />
+                <div class="role-option">
+                  <strong>Staff</strong>
+                  <span>Check-ins & billing</span>
+                </div>
+              </label>
+              <label>
+                <input class="role-input" type="radio" name="role" value="admin" />
+                <div class="role-option">
+                  <strong>Admin</strong>
+                  <span>System-wide controls</span>
+                </div>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="grid-two">
+            <div class="form-group">
+              <label class="form-label" for="firstName">First name</label>
+              <input class="form-input" id="firstName" name="firstName" type="text" placeholder="Amelia" />
+              <p class="form-error" data-error="firstName" hidden>First name is required.</p>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lastName">Last name</label>
+              <input class="form-input" id="lastName" name="lastName" type="text" placeholder="Lopez" />
+              <p class="form-error" data-error="lastName" hidden>Last name is required.</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" id="email" name="email" type="email" placeholder="amelia@healthhub.com" />
+            <p class="form-error" data-error="email" hidden>Please enter a valid email address.</p>
+          </div>
+
+          <div class="grid-two">
+            <div class="form-group">
+              <label class="form-label" for="username">Username</label>
+              <input class="form-input" id="username" name="username" type="text" placeholder="amelia.lopez" />
+              <p class="form-error" data-error="username" hidden>Username must be at least 3 characters.</p>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="password">Password</label>
+              <input class="form-input" id="password" name="password" type="password" placeholder="At least 6 characters" />
+              <p class="form-error" data-error="password" hidden>Password must be at least 6 characters.</p>
+            </div>
+          </div>
+
+          <button class="btn btn-full" type="submit" data-loading-text="Creating account...">Create account</button>
+        </form>
+
+        <div class="text-center text-muted">
+          Already on HealthHub?
+          <a class="link-inline" href="./login.html">Sign in</a>
+        </div>
+        <div class="text-center">
+          <a class="back-link" href="./index.html">← Back to home</a>
+        </div>
+      </section>
+    </main>
+    <script src="./js/auth.js" type="module"></script>
+  </body>
+</html>

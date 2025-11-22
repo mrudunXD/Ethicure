@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HealthHub · Sign in</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&family=Space+Grotesk:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <main class="auth-page">
+      <section class="surface auth-panel">
+        <div class="auth-panel_header">
+          <p class="pill">
+            <span aria-hidden="true">●</span>
+            HealthHub access
+          </p>
+          <h1>Welcome back</h1>
+          <p>Enter your workspace with the same calm interface you left.</p>
+        </div>
+        <form class="form-grid" id="login-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="username">Username</label>
+            <input class="form-input" id="username" name="username" type="text" placeholder="clinic.admin" />
+            <p class="form-error" data-error="username" hidden>Username must be at least 3 characters.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-input" id="password" name="password" type="password" placeholder="••••••••" />
+            <p class="form-error" data-error="password" hidden>Password must be at least 6 characters.</p>
+          </div>
+          <p class="form-status text-muted" data-feedback hidden></p>
+          <button class="btn btn-full" type="submit" data-loading-text="Signing in...">Sign in</button>
+        </form>
+        <div class="text-center text-muted">
+          Need an account?
+          <a class="link-inline" href="./signup.html">Create one</a>
+        </div>
+        <div class="text-center">
+          <a class="back-link" href="./index.html">← Back to home</a>
+        </div>
+      </section>
+    </main>
+    <script src="./js/auth.js" type="module"></script>
+  </body>
+</html>

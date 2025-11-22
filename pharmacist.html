@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HealthHub · Pharmacist Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&family=Space+Grotesk:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body class="dashboard-page" data-role-page="pharmacist">
+    <header class="dashboard-header">
+      <div class="container dashboard-header_inner">
+        <div class="role-intro">
+          <p class="pill">
+            <span aria-hidden="true">●</span>
+            Pharmacy operations
+          </p>
+          <div class="dashboard-topline">
+            <h1><span data-session-name>Pharmacist</span></h1>
+            <span class="status-chip" data-variant="pending">Queue live</span>
+          </div>
+          <p class="role-meta">Manage prescriptions and medicine inventory</p>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-outline" data-button-logout>Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="container dashboard-grid" style="gap: clamp(2rem, 5vw, 3rem);">
+        <section>
+          <div class="dashboard-stats" data-pharmacist-stats></div>
+        </section>
+
+        <section class="dashboard-grid two-column">
+          <div class="card" data-section="prescriptions">
+            <div class="card-header">
+              <h2 class="card-title">Prescription Queue</h2>
+              <select class="form-input" data-filter-status>
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="dispensed">Dispensed</option>
+              </select>
+            </div>
+            <div class="list" data-prescription-list></div>
+          </div>
+
+          <div class="card" data-section="inventory">
+            <div class="card-header">
+              <h2 class="card-title">Inventory</h2>
+              <button class="btn btn-outline" data-toggle-inventory-form>Add Medicine</button>
+            </div>
+            <div class="list" data-inventory-list></div>
+          </div>
+        </section>
+
+        <section class="card" data-section="inventory-form" hidden>
+          <div class="card-header">
+            <h2 class="card-title">Add Medicine to Inventory</h2>
+            <button class="btn btn-outline" data-close-inventory-form>Close</button>
+          </div>
+          <form class="form-grid" data-form-inventory>
+            <div class="form-group">
+              <label class="form-label" for="inventory-name">Medicine Name</label>
+              <input class="form-input" id="inventory-name" name="name" placeholder="e.g., Aspirin" />
+            </div>
+            <div class="grid-two-tight">
+              <div class="form-group">
+                <label class="form-label" for="inventory-stock">Initial Stock</label>
+                <input class="form-input" id="inventory-stock" name="stock" type="number" placeholder="100" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="inventory-unit">Unit</label>
+                <select class="form-input" id="inventory-unit" name="unit">
+                  <option value="tablets">Tablets</option>
+                  <option value="bottles">Bottles</option>
+                  <option value="boxes">Boxes</option>
+                  <option value="vials">Vials</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inventory-threshold">Low Stock Threshold</label>
+              <input class="form-input" id="inventory-threshold" name="threshold" type="number" placeholder="10" />
+            </div>
+            <div class="button-group align-end">
+              <button class="btn" type="submit">Save Medicine</button>
+            </div>
+            <p class="form-error" data-feedback-inventory hidden></p>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <div class="toast" data-toast></div>
+
+    <script type="module" src="./js/pharmacist.js"></script>
+  </body>
+</html>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HealthHub · Patient Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&family=Space+Grotesk:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body class="dashboard-page" data-role-page="patient">
+    <header class="dashboard-header">
+      <div class="container dashboard-header_inner">
+        <div class="role-intro">
+          <p class="pill">
+            <span aria-hidden="true">●</span>
+            Patient care
+          </p>
+          <div class="dashboard-topline">
+            <h1>Hi, <span data-session-name>Patient</span></h1>
+            <span class="status-chip">ID · <span data-session-patient-id>—</span></span>
+          </div>
+          <p class="role-meta">Track visits, prescriptions, and upcoming appointments</p>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-outline" data-button-logout>Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="container dashboard-grid">
+        <section>
+          <div class="dashboard-stats" data-patient-stats></div>
+        </section>
+
+        <section class="dashboard-grid two-column">
+          <div class="card" data-section="wellness">
+            <div class="card-header">
+              <h2 class="card-title">Health snapshot</h2>
+              <span class="card-meta">Live vitals & lifestyle signals</span>
+            </div>
+            <div class="grid-two-tight" data-care-updates></div>
+          </div>
+          <div class="card" data-section="goals">
+            <div class="card-header">
+              <h2 class="card-title">Wellness goals</h2>
+              <span class="card-meta">Weekly targets</span>
+            </div>
+            <div class="list" data-goal-list></div>
+          </div>
+        </section>
+
+        <section class="dashboard-grid two-column">
+          <div class="card" data-section="medications">
+            <div class="card-header">
+              <h2 class="card-title">Medication schedule</h2>
+              <span class="card-meta">Next doses & adherence</span>
+            </div>
+            <div class="list" data-medication-schedule></div>
+          </div>
+          <div class="card" data-section="checklist">
+            <div class="card-header">
+              <h2 class="card-title">Daily checklist</h2>
+              <span class="card-meta">Small actions for today</span>
+            </div>
+            <div class="list" data-checklist></div>
+          </div>
+        </section>
+
+        <section class="dashboard-grid two-column">
+          <div class="card" data-section="labs">
+            <div class="card-header">
+              <h2 class="card-title">Lab results</h2>
+              <span class="card-meta">Latest documents</span>
+            </div>
+            <div class="timeline-stack" data-labs></div>
+          </div>
+          <div class="card" data-section="messages">
+            <div class="card-header">
+              <h2 class="card-title">Care team messages</h2>
+              <span class="card-meta">Secure updates</span>
+            </div>
+            <div class="list" data-messages></div>
+          </div>
+        </section>
+
+        <section class="dashboard-grid two-column">
+          <div class="card" data-section="departments">
+            <div class="card-header">
+              <h2 class="card-title">Departments</h2>
+            </div>
+            <div class="list" data-department-list></div>
+          </div>
+          <div class="card" data-section="doctors">
+            <div class="card-header">
+              <h2 class="card-title">Doctors</h2>
+              <div class="card-meta" data-doctor-filter>All departments</div>
+            </div>
+            <div class="list" data-doctor-list></div>
+          </div>
+        </section>
+
+        <section class="dashboard-grid two-column">
+          <div class="card" data-section="appointments">
+            <div class="card-header">
+              <h2 class="card-title">Upcoming appointments</h2>
+            </div>
+            <div class="list" data-appointment-list></div>
+          </div>
+          <div class="card" data-section="prescriptions">
+            <div class="card-header">
+              <h2 class="card-title">Recent prescriptions</h2>
+            </div>
+            <div class="list" data-prescription-list></div>
+          </div>
+        </section>
+
+        <section class="dashboard-grid two-column">
+          <div class="card" data-section="book">
+            <div class="card-header">
+              <h2 class="card-title">Book appointment</h2>
+            </div>
+            <form class="form-grid" data-book-form>
+              <div class="grid-two-tight">
+                <div class="form-group">
+                  <label class="form-label" for="book-department">Department</label>
+                  <select class="form-input" id="book-department" name="department">
+                    <option value="">Select department</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="book-doctor">Doctor</label>
+                  <select class="form-input" id="book-doctor" name="doctor">
+                    <option value="">Select doctor</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid-two-tight">
+                <div class="form-group">
+                  <label class="form-label" for="book-date">Date</label>
+                  <input class="form-input" type="date" id="book-date" name="date" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="book-time">Time</label>
+                  <input class="form-input" type="time" id="book-time" name="time" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="book-notes">Notes (optional)</label>
+                <textarea class="form-input" id="book-notes" name="notes" placeholder="Any specific concerns..."></textarea>
+              </div>
+              <div class="button-group">
+                <button class="btn" type="submit">Submit request</button>
+              </div>
+              <p class="form-error" data-feedback hidden></p>
+            </form>
+          </div>
+          <div class="card" data-section="billing">
+            <div class="card-header">
+              <h2 class="card-title">Billing snapshot</h2>
+            </div>
+            <div class="billing-summary" data-billing-summary></div>
+            <div class="list" data-billing-invoices></div>
+          </div>
+        </section>
+
+        <section class="dashboard-grid two-column">
+          <div class="card" data-section="benefits">
+            <div class="card-header">
+              <h2 class="card-title">Insurance & benefits</h2>
+            </div>
+            <div data-benefits></div>
+          </div>
+          <div class="card" data-section="resources">
+            <div class="card-header">
+              <h2 class="card-title">Support & resources</h2>
+            </div>
+            <div class="support-links" data-resource-links></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div class="toast" data-toast></div>
+
+    <script type="module" src="./js/patient.js"></script>
+  </body>
+</html>

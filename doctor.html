@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HealthHub · Doctor Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&family=Space+Grotesk:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body class="dashboard-page" data-role-page="doctor">
+    <header class="dashboard-header">
+      <div class="container dashboard-header_inner">
+        <div class="role-intro">
+          <p class="pill">
+            <span aria-hidden="true">●</span>
+            Doctor workspace
+          </p>
+          <div class="dashboard-topline">
+            <h1>Dr. <span data-session-name>Doctor</span></h1>
+            <span class="status-chip" data-variant="positive">On duty</span>
+          </div>
+          <p class="role-meta">
+            <span data-doctor-specialization>Specialist</span>
+            • <span data-doctor-department>Department</span>
+          </p>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-outline" data-button-logout>Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="container dashboard-grid" style="gap: clamp(2rem, 5vw, 3rem);">
+        <section>
+          <div class="dashboard-stats" data-doctor-stats></div>
+        </section>
+
+        <section class="dashboard-grid two-column">
+          <div class="card" data-section="queue">
+            <div class="card-header">
+              <h2 class="card-title">Appointment Queue</h2>
+            </div>
+            <div class="list" data-appointment-list>
+              <!-- Appointments injected -->
+            </div>
+          </div>
+
+          <div class="card" data-section="history">
+            <div class="card-header">
+              <h2 class="card-title">Recent Prescriptions</h2>
+            </div>
+            <div class="list" data-prescription-list>
+              <!-- Prescriptions injected -->
+            </div>
+          </div>
+        </section>
+
+        <section class="card" data-section="prescription-form">
+          <div class="card-header">
+            <h2 class="card-title">Create Prescription</h2>
+            <span class="card-meta" data-prescription-context>No appointment selected</span>
+          </div>
+          <p class="card-meta" data-prescription-empty>Select an appointment to begin composing a prescription.</p>
+          <form class="form-grid" data-prescription-form hidden>
+            <div class="list" data-medicine-list style="gap: 0.75rem;"></div>
+            <div class="button-group">
+              <button class="btn btn-outline" type="button" data-add-medicine>Add medicine</button>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="prescription-notes">Notes</label>
+              <textarea class="form-input" id="prescription-notes" name="notes" placeholder="Instructions for the patient"></textarea>
+            </div>
+            <div class="button-group">
+              <button class="btn" type="submit">Save Prescription</button>
+              <button class="btn btn-outline" type="button" data-cancel-prescription>Cancel</button>
+            </div>
+            <p class="form-error" data-prescription-feedback hidden></p>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <div class="toast" data-toast></div>
+
+    <script type="module" src="./js/doctor.js"></script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HealthHub · Staff Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&family=Space+Grotesk:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body class="dashboard-page" data-role-page="staff">
+    <header class="dashboard-header">
+      <div class="container dashboard-header_inner">
+        <div class="role-intro">
+          <p class="pill">
+            <span aria-hidden="true">●</span>
+            Front desk operations
+          </p>
+          <div class="dashboard-topline">
+            <h1><span data-session-name>Staff Member</span></h1>
+            <span class="status-chip">Today · <span data-report-date></span></span>
+          </div>
+          <p class="role-meta">Manage patient visits, check-ins, and billing</p>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-outline" data-button-logout>Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="container dashboard-grid" style="gap: clamp(2rem, 5vw, 3rem);">
+        <section>
+          <div class="dashboard-stats" data-staff-stats></div>
+        </section>
+
+        <section class="dashboard-grid two-column">
+          <div class="card" data-section="today-visits">
+            <div class="card-header">
+              <h2 class="card-title">Today's Visits</h2>
+              <button class="btn btn-outline" data-show-checkin-form>Check-in Patient</button>
+            </div>
+            <div class="list" data-visit-list></div>
+          </div>
+
+          <div class="card" data-section="billing">
+            <div class="card-header">
+              <h2 class="card-title">Pending Billing</h2>
+            </div>
+            <div class="list" data-billing-list></div>
+          </div>
+        </section>
+
+        <section class="card" data-section="checkin-form" hidden>
+          <div class="card-header">
+            <h2 class="card-title">Patient Check-in</h2>
+            <button class="btn btn-outline" data-hide-checkin-form>Close</button>
+          </div>
+          <form class="form-grid" data-form-checkin>
+            <div class="grid-two-tight">
+              <div class="form-group">
+                <label class="form-label" for="checkin-name">Patient Name</label>
+                <input class="form-input" id="checkin-name" name="name" placeholder="John Doe" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="checkin-doctor">Doctor</label>
+                <input class="form-input" id="checkin-doctor" name="doctor" placeholder="Dr. Smith" />
+              </div>
+            </div>
+            <div class="grid-two-tight">
+              <div class="form-group">
+                <label class="form-label" for="checkin-time">Appointment Time</label>
+                <input class="form-input" id="checkin-time" name="time" type="time" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="checkin-status">Status</label>
+                <select class="form-input" id="checkin-status" name="status">
+                  <option value="waiting">Waiting</option>
+                  <option value="in-progress">In Progress</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="checkin-notes">Notes</label>
+              <textarea class="form-input" id="checkin-notes" name="notes" placeholder="Additional visit notes"></textarea>
+            </div>
+            <div class="button-group align-end">
+              <button class="btn" type="submit">Log Check-in</button>
+            </div>
+            <p class="form-error" data-feedback-checkin hidden></p>
+          </form>
+        </section>
+
+        <section class="card" data-section="reports">
+          <div class="card-header">
+            <h2 class="card-title">Daily Report</h2>
+            <span class="card-meta" data-report-date></span>
+          </div>
+          <div class="dashboard-grid two-column">
+            <div class="list" data-report-highlights></div>
+            <div class="list" data-report-actions></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div class="toast" data-toast></div>
+
+    <script type="module" src="./js/staff.js"></script>
+  </body>
+</html>
