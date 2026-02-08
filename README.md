@@ -88,7 +88,7 @@ Patients can easily book appointments, doctors can manage treatment records, pha
 
 ## 📄 Authors
 **Mrudun Samant / 1262252737**
-**Saransh Pathal / 1262251593**
+**Saransh Pathak / 1262251593**
 Mini Project – Web Page Designing
 
 ---
